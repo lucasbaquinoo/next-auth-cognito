@@ -1,4 +1,8 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Amplify from 'aws-amplify'
+import awsmobile from '../aws-exports'
+
+// Amplify.configure({...awsmobile, ssr: true})
 
 export default class MyDocument extends Document {
   render() {

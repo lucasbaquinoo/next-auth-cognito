@@ -1,6 +1,11 @@
+import Amplify from "aws-amplify";
 import { Flex, Button, Stack } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from 'react-hook-form'
+import awsmobile from "../aws-exports";
 import { Input } from "../components/Form/Input";
+import { signIn } from "../services/api";
+
+Amplify.configure({...awsmobile, ssr: true})
 
 type SignInFormData = {
   email: string;
@@ -10,10 +15,9 @@ type SignInFormData = {
 export default function Home() {
   const { register, handleSubmit, formState } = useForm()
 
-  const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
-    await new Promise(resolve => setTimeout(resolve, 2000))
-
-    console.log(values)
+  const handleSignIn: SubmitHandler<SignInFormData> = async ({ email, password }) => {
+    const response = await signIn(email, password);
+    console.log(response)
   }
 
   return (
